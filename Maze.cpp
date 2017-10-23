@@ -49,18 +49,27 @@ void Maze::writeBlock()
     maze[ x ][ y ] = block; //set block at 1,4
     maze[ ++x ][ y ] = block; //set block at 2,4
     maze[ ++x ][ y ] = block; //set block at 3,4
-    maze[ x ][ --y ] = block; //set block at 3,3
     --y; //y = 2
     maze[ x ][ --y ] = block; //set block at 3,1
     maze[ x ][ --y ] = block; //set block at 3,0
     --x; //x = 2
     maze[ --x ][ ++y ] = block; //set block at 1,1
     maze[ --x ][ ++y ] = block; //set block at 0,2
+    maze[6][7] = block;
+    maze[1][6]= block;
+    maze[4][7]= block;
+    maze[7][5]= block;
+    maze[5][5]= block;
+    maze[6][5]= block;
+    maze[5][3]= block;
+    maze[4][2]= block;
+    maze[6][1]= block;
+    maze[7][2]= block;
 }
 
 void Maze::writeExit()
 {
-    maze[ 0 ][ 3 ] = 'F'; //set exit at 0,3
+    maze[ 5 ][ 6 ] = 'F'; //set exit at 0,3
 }
 
 //Se escoge la posicion de inicio
@@ -108,14 +117,13 @@ bool Maze::backTrack( int row, int col )
     {
         setCell( row, col, 'X' ); //marca celdas vistadas
         //busca en las celdas adyacentes pero solo si ya no se alcanzo el final
-        if ( backTrack( (row - 1), col ) == true )
-        {
-            imprimirAux(2);
-            return true;
-        }
-        else if ( backTrack( row, (col + 1) ) == true )
+
+        if ( backTrack( row, (col + 1) ) == true )
         {
             imprimirAux(6);
+            return true;
+        }else if ( backTrack( (row + 1), col ) == true ) {
+            imprimirAux(8);
             return true;
         }
         else if ( backTrack( row, (col - 1) ) == true )
@@ -123,9 +131,9 @@ bool Maze::backTrack( int row, int col )
             imprimirAux(4);
             return true;
         }
-        else if ( backTrack( (row + 1), col ) == true )
+        else if ( backTrack( (row - 1), col ) == true )
         {
-            imprimirAux(8);
+            imprimirAux(2);
             return true;
         }
         else

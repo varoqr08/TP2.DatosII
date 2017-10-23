@@ -11,8 +11,8 @@
 #include <iostream>
 using namespace std;
 
-static const int ROWS = 4;
-static const int COLUMNS = 5;
+static const int ROWS = 8;
+static const int COLUMNS = 8;
 
 class Maze
 {
